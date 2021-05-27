@@ -4,8 +4,8 @@ This is a tool that synchronizes your [Serato DJ Pro](https://serato.com/dj/pro)
 crates with a folder in your file system. This comes in handy when you want to
 organize your crates outside of Serato, but don't want to use iTunes to do it.
 
-This program has been tested with Serato DJ Pro 2.5.1 but will most likely work
-with other versions as well.
+This program has been tested with Serato DJ Pro 1.8.1 and Serato DJ Pro 2.5.1
+so it will most likely work with other versions as well.
 
 ## How to use
 
