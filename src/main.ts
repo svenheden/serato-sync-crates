@@ -26,8 +26,8 @@ try {
   const seratoFolder = Deno.args[1].replace(/\/$/, "");
 
   const crates = await findTracks(musicFolder, supportedFileEndings);
-  const numberOfCrates = Object.keys(crates).length;
-  const numberOfTracks = Object.values(crates).flat().length;
+  const numberOfCrates = crates.size;
+  const numberOfTracks = Array.from(crates.values()).flat().length;
 
   if (numberOfTracks === 0) {
     throw new Error("Cannot find any tracks in the provided music folder");
@@ -39,8 +39,7 @@ try {
 
   await emptyDir(`${seratoFolder}/Subcrates`);
 
-  for (const cratePath in crates) {
-    const tracks = crates[cratePath];
+  for (const [cratePath, tracks] of crates) {
     const crateFile = createCrateFile(tracks);
     const fileName = `${cratePath.replace(/\//g, "%%")}.crate`;
 

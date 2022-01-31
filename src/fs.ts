@@ -2,17 +2,17 @@ import { expandGlob } from "https://deno.land/std@0.97.0/fs/mod.ts";
 
 export async function findTracks(musicFolder: string, fileEndings: string[]) {
   const globPattern = `${musicFolder}/**/*.{${fileEndings.join()}}`;
-  const crates: Record<string, string[]> = {};
+  const crates = new Map<string, string[]>();
 
   for await (const { isFile, path } of expandGlob(globPattern)) {
     if (isFile) {
       const crate = getCrateNameForPath(musicFolder, path);
 
-      if (!(crate in crates)) {
-        crates[crate] = [];
+      if (crates.has(crate)) {
+        crates.get(crate)!.push(path);
+      } else {
+        crates.set(crate, [path]);
       }
-
-      crates[crate].push(path);
     }
   }
 
